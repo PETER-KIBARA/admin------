@@ -131,8 +131,8 @@ h3 {
     content: '';
     position: absolute;
     inset: 0;
-    /* Create a gradient overlay to ensure text on the left is perfectly readable */
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.1) 100%);
+    /* Create a lighter gradient overlay to ensure text is readable but image isn't too dark */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
     z-index: 1;
 }
 
