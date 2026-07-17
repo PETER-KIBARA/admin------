@@ -40,11 +40,11 @@ const LandingPage = () => {
             <nav className="navbar">
                 <div className="nav-brand">PODAGO</div>
                 <button className="btn-login" onClick={() => navigate('/login')}>
-                    Member Login
+                    Admin Login
                 </button>
             </nav>
 
-            <header className="hero">
+            <header className="hero" style={{ background: "url('/assets/home%20page.jpeg') center/cover no-repeat" }}>
                 <div className="hero-content">
                     <h1 className="hero-title animate-hero-title">
                         Podago <span>Dairy Cooperative</span>
@@ -53,14 +53,14 @@ const LandingPage = () => {
                         Empowering farmers through technology, transparency, and reliable markets.
                     </p>
                     <div className="hero-buttons animate-hero-btn">
-                        <button className="btn-login" style={{ fontSize: '1.2rem', padding: '1rem 3rem' }} onClick={() => navigate('/login')}>
+                        <button className="btn-login-primary" onClick={() => navigate('/login')}>
                             Access Portal
                         </button>
                         <a
                             href="https://github.com/muchirimorris/podago/releases/download/final/app-release.apk"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="btn-download"
+                            className="btn-download-secondary"
                         >
                             Download App
                         </a>

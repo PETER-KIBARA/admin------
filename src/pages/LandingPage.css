@@ -6,7 +6,7 @@
     /* Emerald 700 */
     --primary-light: #D1FAE5;
     /* Emerald 100 */
-    --accent: #F59E0B;
+    --secondary: #F59E0B;
     /* Amber 500 */
     --navy: #1E293B;
     /* Slate 800 */
@@ -117,114 +117,131 @@ h3 {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Hero Section - Clean & Professional */
+/* Hero Section - Image Background Style */
 .hero {
-    min-height: 70vh;
-    /* Reduced height */
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white;
+    min-height: 90vh;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     position: relative;
-    border-radius: 0;
-    /* Remove curves */
-    clip-path: none;
-    /* Remove any clip paths */
-    overflow: hidden;
-    padding: 6rem 5%;
+    padding: 0;
+    margin: 0;
 }
 
-/* Remove abstract shapes */
-.hero::before,
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Create a gradient overlay to ensure text on the left is perfectly readable */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.1) 100%);
+    z-index: 1;
+}
+
 .hero::after {
     display: none;
 }
 
 .hero-content {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 8%;
+    text-align: left;
+    background: transparent;
     z-index: 10;
-    padding-top: 2rem;
 }
 
-/* Hero Title Visibility & Coolness */
+.hero-text-wrapper {
+    max-width: 600px;
+}
+
+/* Hero Title - Bold, Clean, Light */
 .hero-title {
-    font-size: 4rem;
-    /* Slightly smaller */
-    font-weight: 700;
+    font-size: 5rem;
+    font-weight: 900;
     margin-bottom: 1.5rem;
     letter-spacing: -2px;
-    text-shadow: none;
-    /* Remove shadow */
-    /* Visibility Fix */
+    line-height: 1.1;
+    color: #ffffff;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.8);
 }
 
 .hero-title span {
     display: block;
-    font-weight: 400;
-    font-size: 3.5rem;
-    opacity: 1;
-    /* Increased opacity for visibility */
+    font-weight: 500;
+    font-size: 4rem;
     color: var(--secondary);
-    /* Use yellow accent */
-    /* Make it pop */
-    text-shadow: none;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.8);
 }
 
 .hero-subtitle {
     font-size: 1.25rem;
     font-weight: 400;
-    opacity: 0.9;
-    max-width: 700px;
-    margin: 0 auto 3rem;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 500px;
+    margin: 0 0 3rem 0;
     line-height: 1.6;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
 
 .hero-buttons {
     display: flex;
-    gap: 1.5rem;
-    justify-content: center;
+    gap: 1rem;
+    justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
 }
 
-.hero .btn-login {
-    background: var(--secondary);
-    color: var(--primary);
+.btn-login-primary {
+    background: var(--primary);
+    color: white;
     border: none;
     font-weight: 700;
-    padding: 1.2rem 3.5rem;
+    padding: 1.2rem 3rem;
     font-size: 1.1rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.hero .btn-download {
+.btn-login-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn-download-secondary {
     background: transparent;
-    color: white;
-    border: 2px solid white;
+    color: #ffffff;
+    border: 2px solid #ffffff;
     font-weight: 700;
-    padding: 1.2rem 3.5rem;
+    padding: 1.1rem 3rem;
     font-size: 1.1rem;
-    border-radius: 50px;
+    border-radius: 4px;
     text-decoration: none;
     transition: all 0.3s ease;
     display: inline-block;
 }
 
-.hero .btn-download:hover {
-    background: white;
-    color: var(--primary);
-    transform: translateY(-3px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+.btn-download-secondary:hover {
+    background: #ffffff;
+    color: var(--text-main);
 }
 
-.hero .btn-login:hover {
-    background: white;
-    color: var(--primary);
-    transform: translateY(-3px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+@media (max-width: 968px) {
+    .hero-content {
+        padding: 6rem 5% 4rem;
+        text-align: center;
+    }
+    .hero-buttons {
+        justify-content: center;
+    }
+    .hero-title {
+        font-size: 3.5rem;
+    }
+    .hero-title span {
+        font-size: 2.5rem;
+    }
 }
 
 /* Section Common Styles */
