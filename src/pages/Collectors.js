@@ -9,9 +9,10 @@ import {
     updateDoc,
     setDoc,
 } from "firebase/firestore";
-import { db, auth, firebaseConfig } from "../services/firebase";
-import { getAuth, createUserWithEmailAndPassword, signOut, initializeAuth, inMemoryPersistence } from "firebase/auth";
+import { db, firebaseConfig } from "../services/firebase";
+import { createUserWithEmailAndPassword, signOut, initializeAuth, inMemoryPersistence } from "firebase/auth";
 import { initializeApp, deleteApp } from "firebase/app";
+import { FaPlus, FaClipboardList, FaEdit, FaTrash, FaSave, FaTimes, FaCheck, FaTint, FaUserFriends } from "react-icons/fa";
 import "./Collectors.css";
 
 function Collectors() {
@@ -219,7 +220,7 @@ function Collectors() {
             {/* 🔹 Collectors Section */}
             <div className="header-actions">
                 <button className="add-btn" onClick={() => setShowAddCollectorModal(true)}>
-                    ➕ Add Collector
+                    <FaPlus className="icon" /> Add Collector
                 </button>
             </div>
 
@@ -244,19 +245,19 @@ function Collectors() {
                                         className="edit-btn btn-activity"
                                         onClick={() => handleViewActivity(collector)}
                                     >
-                                        📋 Show Activities
+                                        <FaClipboardList className="icon" /> Show Activities
                                     </button>
                                     <button
                                         className="edit-btn"
                                         onClick={() => handleEditCollector(collector)}
                                     >
-                                        ✏️ Edit
+                                        <FaEdit className="icon" /> Edit
                                     </button>
                                     <button
                                         className="delete-btn"
                                         onClick={() => handleDeleteCollector(collector)}
                                     >
-                                        ❌ Delete
+                                        <FaTrash className="icon" /> Delete
                                     </button>
                                 </td>
                             </tr>
@@ -303,13 +304,13 @@ function Collectors() {
 
                         <div className="modal-actions">
                             <button className="save-btn" onClick={handleSaveCollector}>
-                                💾 Save
+                                <FaSave className="icon" /> Save
                             </button>
                             <button
                                 className="cancel-btn"
                                 onClick={() => setEditingCollector(null)}
                             >
-                                ❌ Cancel
+                                <FaTimes className="icon" /> Cancel
                             </button>
                         </div>
                     </div>
@@ -358,14 +359,14 @@ function Collectors() {
                                 onClick={handleAddCollector}
                                 disabled={isAddingCollector}
                             >
-                                {isAddingCollector ? "Creating..." : "✅ Create"}
+                                {isAddingCollector ? "Creating..." : <><FaCheck className="icon" /> Create</>}
                             </button>
                             <button
                                 className="cancel-btn"
                                 onClick={() => setShowAddCollectorModal(false)}
                                 disabled={isAddingCollector}
                             >
-                                ❌ Cancel
+                                <FaTimes className="icon" /> Cancel
                             </button>
                         </div>
                     </div>
@@ -382,13 +383,13 @@ function Collectors() {
                                 onClick={() => setActivityTab("milk")}
                                 className={`tab-button ${activityTab === 'milk' ? 'active' : ''}`}
                             >
-                                🥛 Milk Collected ({activityLogs.length})
+                                <FaTint className="icon" /> Milk Collected ({activityLogs.length})
                             </button>
                             <button
                                 onClick={() => setActivityTab("farmers")}
                                 className={`tab-button ${activityTab === 'farmers' ? 'active' : ''}`}
                             >
-                                🧑‍🌾 Farmers Registered ({registeredFarmers.length})
+                                <FaUserFriends className="icon" /> Farmers Registered ({registeredFarmers.length})
                             </button>
                         </div>
 

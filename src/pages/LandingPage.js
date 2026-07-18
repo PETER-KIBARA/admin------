@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaTint, FaSnowflake, FaTruck, FaTractor, FaMoneyBillWave } from 'react-icons/fa';
 import './LandingPage.css';
 
 const LandingPage = () => {
@@ -114,23 +115,23 @@ const LandingPage = () => {
                     <h2 className="section-header">Core Activities</h2>
                     <div className="activities-grid">
                         <div className="activity-item">
-                            <span className="activity-icon">🥛</span>
+                            <span className="activity-icon"><FaTint /></span>
                             <span>Milk collection and bulking from farmers</span>
                         </div>
                         <div className="activity-item delay-100">
-                            <span className="activity-icon">❄️</span>
+                            <span className="activity-icon"><FaSnowflake /></span>
                             <span>Milk cooling and storage to reduce spoilage</span>
                         </div>
                         <div className="activity-item delay-200">
-                            <span className="activity-icon">🚚</span>
+                            <span className="activity-icon"><FaTruck /></span>
                             <span>Transportation of milk to processors</span>
                         </div>
                         <div className="activity-item delay-100">
-                            <span className="activity-icon">🐄</span>
+                            <span className="activity-icon"><FaTractor /></span>
                             <span>Support services such as feed supply and animal improvement</span>
                         </div>
                         <div className="activity-item delay-200">
-                            <span className="activity-icon">💰</span>
+                            <span className="activity-icon"><FaMoneyBillWave /></span>
                             <span>Facilitating farmer payments and financial services</span>
                         </div>
                     </div>

@@ -9,21 +9,19 @@ import {
   orderBy,
   updateDoc,
   doc,
-  onSnapshot,
-  addDoc,
   writeBatch,
-  setDoc,
-  getDoc
+  setDoc
 } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { format } from "date-fns";
 import { toast } from "react-hot-toast";
 import { sendNotification } from "../services/notificationService"; // NEW
+import { FaMoneyBillWave, FaTint, FaSeedling, FaTimes, FaMobileAlt, FaDownload, FaExclamationTriangle, FaTrash } from "react-icons/fa";
 import "./Payments.css";
 
 function Payments() {
   const [logs, setLogs] = useState([]);
-  const [feedDeductions, setFeedDeductions] = useState([]);
+  const [, setFeedDeductions] = useState([]);
   const [farmers, setFarmers] = useState([]);
   const [selectedFarmer, setSelectedFarmer] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
@@ -32,7 +30,7 @@ function Payments() {
   const [dateRange, setDateRange] = useState({ start: "", end: "" });
   const [viewMode, setViewMode] = useState('summary');
   const [summaryTab, setSummaryTab] = useState('monthly'); // monthly, yearly, all_time
-  const [paymentType, setPaymentType] = useState("all");
+  const [, setPaymentType] = useState("all");
   const [isProcessing, setIsProcessing] = useState(false);
   const [pricePerLiter, setPricePerLiter] = useState(45);
   const [showPriceInput, setShowPriceInput] = useState(false);
@@ -109,6 +107,7 @@ function Payments() {
 
   useEffect(() => {
     fetchMilkPayments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFarmer, statusFilter, month, year, dateRange]);
 
 
@@ -424,7 +423,6 @@ function Payments() {
             type: "payment"
           });
         }
-        opCount++;
         // Note: processSingleFarmer logic does multiple ops (updates logs + inserts payment). 
         // Realistically we should commit every ~400 ops.
       }
@@ -446,6 +444,7 @@ function Payments() {
   };
 
   // 🔹 GENERATE PDF PAYSLIP
+  // eslint-disable-next-line no-unused-vars
   const generatePayslip = (farmerId) => {
     const farmer = farmers.find(f => f.id === farmerId);
     if (!farmer) return;
@@ -704,7 +703,7 @@ function Payments() {
       {/* 🔹 Milk Price */}
       <div className="price-configuration">
         <div className="price-header">
-          <h3>💰 Milk Price Rate: KES {pricePerLiter}/L</h3>
+          <h3><FaMoneyBillWave className="icon" /> Milk Price Rate: KES {pricePerLiter}/L</h3>
           <button className="btn-toggle-price" onClick={() => setShowPriceInput(!showPriceInput)}>
             {showPriceInput ? "Cancel" : "Update Rate"}
           </button>
@@ -740,9 +739,9 @@ function Payments() {
                   <span className={`status-pill ${item.pending > 0 ? 'pending' : 'paid'}`}>{item.pending > 0 ? 'Action Needed' : 'Completed'}</span>
                 </div>
                 <div className="month-card-stats">
-                  <div className="stat-row"><span>🥛 Gross:</span><span className="val positive">KES {item.gross.toLocaleString()}</span></div>
-                  <div className="stat-row"><span>🌾 Deductions:</span><span className="val negative">- KES {item.deductions.toLocaleString()}</span></div>
-                  <div className="stat-row total"><span>💰 Net:</span><span className="val">KES {item.net.toLocaleString()}</span></div>
+                  <div className="stat-row"><span><FaTint className="icon" /> Gross:</span><span className="val positive">KES {item.gross.toLocaleString()}</span></div>
+                  <div className="stat-row"><span><FaSeedling className="icon" /> Deductions:</span><span className="val negative">- KES {item.deductions.toLocaleString()}</span></div>
+                  <div className="stat-row total"><span><FaMoneyBillWave className="icon" /> Net:</span><span className="val">KES {item.net.toLocaleString()}</span></div>
                 </div>
                 <div className="month-card-action"><button>View & Process ➜</button></div>
               </div>
@@ -755,9 +754,9 @@ function Payments() {
                   <span className={`status-pill ${item.pending > 0 ? 'pending' : 'paid'}`}>{item.pending > 0 ? 'Action Needed' : 'Completed'}</span>
                 </div>
                 <div className="month-card-stats">
-                  <div className="stat-row"><span>🥛 Gross:</span><span className="val positive">KES {item.gross.toLocaleString()}</span></div>
-                  <div className="stat-row"><span>🌾 Deductions:</span><span className="val negative">- KES {item.deductions.toLocaleString()}</span></div>
-                  <div className="stat-row total"><span>💰 Net:</span><span className="val">KES {item.net.toLocaleString()}</span></div>
+                  <div className="stat-row"><span><FaTint className="icon" /> Gross:</span><span className="val positive">KES {item.gross.toLocaleString()}</span></div>
+                  <div className="stat-row"><span><FaSeedling className="icon" /> Deductions:</span><span className="val negative">- KES {item.deductions.toLocaleString()}</span></div>
+                  <div className="stat-row total"><span><FaMoneyBillWave className="icon" /> Net:</span><span className="val">KES {item.net.toLocaleString()}</span></div>
                 </div>
                 <div className="month-card-action"><button style={{ color: '#3498db' }}>View Year ➜</button></div>
               </div>
@@ -770,9 +769,9 @@ function Payments() {
                   <span className="status-pill">{allTimeSummary.count} Transactions</span>
                 </div>
                 <div className="month-card-stats" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
-                  <div className="stat-row"><h3>🥛 Total Gross</h3><span className="val positive" style={{ fontSize: '1.2rem' }}>KES {allTimeSummary.gross.toLocaleString()}</span></div>
-                  <div className="stat-row"><h3>🌾 Total Deductions</h3><span className="val negative" style={{ fontSize: '1.2rem' }}>- KES {allTimeSummary.deductions.toLocaleString()}</span></div>
-                  <div className="stat-row total"><h3>💰 Net Profit</h3><span className="val" style={{ fontSize: '1.2rem' }}>KES {allTimeSummary.net.toLocaleString()}</span></div>
+                  <div className="stat-row"><h3><FaTint className="icon" /> Total Gross</h3><span className="val positive" style={{ fontSize: '1.2rem' }}>KES {allTimeSummary.gross.toLocaleString()}</span></div>
+                  <div className="stat-row"><h3><FaSeedling className="icon" /> Total Deductions</h3><span className="val negative" style={{ fontSize: '1.2rem' }}>- KES {allTimeSummary.deductions.toLocaleString()}</span></div>
+                  <div className="stat-row total"><h3><FaMoneyBillWave className="icon" /> Net Profit</h3><span className="val" style={{ fontSize: '1.2rem' }}>KES {allTimeSummary.net.toLocaleString()}</span></div>
                 </div>
                 <div className="month-card-action"><button style={{ color: '#8e44ad', width: '100%', marginTop: '10px' }}>View Full History ➜</button></div>
               </div>
@@ -823,10 +822,10 @@ function Payments() {
               <option value="pending">Pending</option>
             </select>
             <button onClick={fetchMilkPayments}>Apply Filter</button>
-            <button className="clear-btn" onClick={clearFilters}>✖ Clear</button>
+            <button className="clear-btn" onClick={clearFilters}><FaTimes className="icon" /> Clear</button>
             <div style={{ marginLeft: 'auto', display: 'flex', gap: '10px' }}>
-              <button className="export-btn" onClick={exportMPesaCSV} style={{ background: '#27ae60', color: 'white' }}>📲 Export M-Pesa CSV</button>
-              <button className="export-btn" onClick={exportCSV} style={{ background: '#f39c12', color: 'white' }}>⬇ Report CSV</button>
+              <button className="export-btn" onClick={exportMPesaCSV} style={{ background: '#27ae60', color: 'white' }}><FaMobileAlt className="icon" /> Export M-Pesa CSV</button>
+              <button className="export-btn" onClick={exportCSV} style={{ background: '#f39c12', color: 'white' }}><FaDownload className="icon" /> Report CSV</button>
             </div>
           </div>
 
@@ -854,17 +853,17 @@ function Payments() {
               return (
                 <>
                   <div className="summary-card">
-                    <h3>🥛 Total Milk Value</h3>
+                    <h3><FaTint className="icon" /> Total Milk Value</h3>
                     <div className="amount positive">KES {totalGross.toLocaleString()}</div>
                     <div className="subtext">{currentLogs.length} Transactions</div>
                   </div>
                   <div className="summary-card feed-deductions">
-                    <h3>🌾 Total Deductions</h3>
+                    <h3><FaSeedling className="icon" /> Total Deductions</h3>
                     <div className="amount negative">- KES {totalDeductions.toLocaleString()}</div>
                     <div className="subtext">{currentDeductions.length} Deductions</div>
                   </div>
                   <div className="summary-card net-payable">
-                    <h3>💰 Net Payable</h3>
+                    <h3><FaMoneyBillWave className="icon" /> Net Payable</h3>
                     <div className="amount">KES {totalNet.toLocaleString()}</div>
                   </div>
 
@@ -872,7 +871,7 @@ function Payments() {
                   {selectedFarmer && totalDeductions > 0 && (
                     <div style={{ gridColumn: '1 / -1', marginTop: '10px', padding: '10px', background: '#fff3cd', borderRadius: '8px', border: '1px solid #ffeeba', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                       <div>
-                        <strong>⚠️ Data Cleanup:</strong> If these deductions are incorrect or old, you can waive them here.
+                        <strong><FaExclamationTriangle className="icon" /> Data Cleanup:</strong> If these deductions are incorrect or old, you can waive them here.
                       </div>
                       <button
                         onClick={() => clearPendingDeductions(selectedFarmer)}
@@ -887,7 +886,7 @@ function Payments() {
                           fontWeight: 'bold'
                         }}
                       >
-                        {isProcessing ? "Processing..." : "🗑️ Clear These Deductions"}
+                        {isProcessing ? "Processing..." : <><FaTrash className="icon" /> Clear These Deductions</>}
                       </button>
                     </div>
                   )}

@@ -8,13 +8,13 @@ import {
   updateDoc,
   deleteDoc,
   doc,
-  serverTimestamp,
-  query, where
+  serverTimestamp
 } from "firebase/firestore";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
   PieChart, Pie, Cell
 } from "recharts";
+import { FaMoneyBillWave, FaSeedling, FaMedal, FaTruck, FaLightbulb } from "react-icons/fa";
 import "./Analytics.css";
 
 const COLORS = ['#10B981', '#3B82F6', '#F59E0B', '#EC4899', '#8B5CF6', '#EF4444'];
@@ -116,7 +116,7 @@ function Analytics() {
         const financeData = Object.values(logsByMonth)
           .sort((a, b) => a.month.localeCompare(b.month))
           .map(item => {
-            const [y, m] = item.month.split('-');
+            const [, m] = item.month.split('-');
             return {
               name: `${MONTHS[parseInt(m) - 1]}`,
               Income: Math.round(item.gross),
@@ -173,7 +173,7 @@ function Analytics() {
 
         {/* 📊 Financial Trends */}
         <div className="chart-card wide-card">
-          <h3>💰 Financial Performance (Last 6 Months)</h3>
+          <h3><FaMoneyBillWave className="icon" /> Financial Performance (Last 6 Months)</h3>
           <div className="chart-wrapper">
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={financeStats} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
@@ -191,7 +191,7 @@ function Analytics() {
 
         {/* 🥧 Feed Popularity */}
         <div className="chart-card">
-          <h3>🌾 Feed Demand (By Quantity)</h3>
+          <h3><FaSeedling className="icon" /> Feed Demand (By Quantity)</h3>
           <div className="chart-wrapper">
             {feedStats.length > 0 ? (
               <ResponsiveContainer width="100%" height={250}>
@@ -208,7 +208,7 @@ function Analytics() {
 
         {/* 🏆 Top Farmers */}
         <div className="chart-card">
-          <h3>🥇 Top Performing Farmers</h3>
+          <h3><FaMedal className="icon" /> Top Performing Farmers</h3>
           <div className="leaderboard-list">
             {farmerStats.map((stat, i) => (
               <div key={stat.name} className="leaderboard-item">
@@ -224,7 +224,7 @@ function Analytics() {
 
         {/* 🚚 Top Collecting Officers */}
         <div className="chart-card wide-card">
-          <h3>🚛 Top Collecting Officers</h3>
+          <h3><FaTruck className="icon" /> Top Collecting Officers</h3>
           <div className="leaderboard-list">
             {collectorStats.map((stat, i) => (
               <div key={stat.name} className="leaderboard-item">
@@ -249,7 +249,7 @@ function Analytics() {
       {/* 💡 Tips Management (Preserved) */}
       <div className="tips-management-section">
         <div className="analytics-header">
-          <h2 className="section-title">💡 Tips Management</h2>
+          <h2 className="section-title"><FaLightbulb className="icon" /> Tips Management</h2>
         </div>
 
         {/* ... Tips Form ... */}

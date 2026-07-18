@@ -9,6 +9,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { format } from "date-fns";
+import { FaTimes, FaDownload, FaTint, FaFileAlt } from "react-icons/fa";
 import "./MilkLogs.css";
 
 function MilkLogs() {
@@ -253,23 +254,23 @@ function MilkLogs() {
 
         <button className="btn btn-primary" onClick={fetchLogs}>Apply</button>
         <button className="btn btn-danger" onClick={clearFilters}>
-          ✖ Clear
+          <FaTimes className="icon" /> Clear
         </button>
         <button className="btn btn-outline" onClick={exportCSV}>
-          ⬇ Export CSV
+          <FaDownload className="icon" /> Export CSV
         </button>
       </div>
 
       {/* 🔹 Totals Summary */}
       <div className="summary-cards">
         <div className="summary-card">
-          <h3>🥛 Total Quantity</h3>
+          <h3><FaTint className="icon" /> Total Quantity</h3>
           <p className="value">
             {logs.reduce((sum, log) => sum + (Number(log.quantity) || 0), 0).toLocaleString()} L
           </p>
         </div>
         <div className="summary-card">
-          <h3>📝 Total Records</h3>
+          <h3><FaFileAlt className="icon" /> Total Records</h3>
           <p className="value">{logs.length}</p>
         </div>
       </div>

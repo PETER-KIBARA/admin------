@@ -7,13 +7,11 @@ import {
   doc,
   deleteDoc,
   updateDoc,
-  setDoc,
   runTransaction,
 } from "firebase/firestore";
-import { db, auth, firebaseConfig } from "../services/firebase"; // Make sure auth and firebaseConfig are imported
-import { getAuth, deleteUser, updateEmail, updateProfile, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { db } from "../services/firebase"; // Make sure auth and firebaseConfig are imported
 import { getDoc } from "firebase/firestore"; // Ensure getDoc is imported here as well if not already in line 4
-import { initializeApp, deleteApp } from "firebase/app";
+import { FaPlus, FaEdit, FaTrash, FaSave, FaTimes } from "react-icons/fa";
 import "./Farmers.css";
 
 function Farmers() {
@@ -38,7 +36,6 @@ function Farmers() {
   // 🔹 Fetch next available ID for display
   const fetchNextId = async () => {
     try {
-      const counterRef = doc(db, "counters", "farmers");
       const counterSnap = await getDoc(doc(db, "counters", "farmers")); // Use getDoc imported from firestore
 
       let nextSeq = 1;
@@ -111,7 +108,7 @@ function Farmers() {
         const counterDoc = await transaction.get(counterRef);
 
         if (!counterDoc.exists()) {
-          throw "Counter document does not exist!";
+          throw new Error("Counter document does not exist!");
         }
 
         const newSequence = counterDoc.data().currentSequence + 1;
@@ -161,7 +158,7 @@ function Farmers() {
             setShowAddFarmerModal(true);
           }}
         >
-          ➕ Add Farmer
+          <FaPlus className="icon" /> Add Farmer
         </button>
       </div>
 
@@ -188,13 +185,13 @@ function Farmers() {
                     className="edit-btn"
                     onClick={() => handleEdit(farmer)}
                   >
-                    ✏️ Edit
+                    <FaEdit className="icon" /> Edit
                   </button>
                   <button
                     className="delete-btn"
                     onClick={() => handleDelete(farmer.id)}
                   >
-                    ❌ Delete
+                    <FaTrash className="icon" /> Delete
                   </button>
                 </td>
               </tr>
@@ -252,13 +249,13 @@ function Farmers() {
 
             <div className="modal-actions">
               <button className="save-btn" onClick={handleAddFarmer}>
-                ➕ Add
+                <FaPlus className="icon" /> Add
               </button>
               <button
                 className="cancel-btn"
                 onClick={() => setShowAddFarmerModal(false)}
               >
-                ❌ Cancel
+                <FaTimes className="icon" /> Cancel
               </button>
             </div>
           </div>
@@ -303,13 +300,13 @@ function Farmers() {
 
             <div className="modal-actions">
               <button className="save-btn" onClick={handleSave}>
-                💾 Save
+                <FaSave className="icon" /> Save
               </button>
               <button
                 className="cancel-btn"
                 onClick={() => setEditingFarmer(null)}
               >
-                ❌ Cancel
+                <FaTimes className="icon" /> Cancel
               </button>
             </div>
           </div>

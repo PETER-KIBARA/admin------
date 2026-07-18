@@ -12,7 +12,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import {
-  FaFilter, // Added import
+  FaCalendarDay, FaChartBar, FaCalendarAlt, FaChartLine, FaInfinity,
+  FaHandPaper, FaUserTie, FaTruck, FaTint, FaMoneyBillWave, FaSeedling, FaMoneyBillAlt, FaHourglassHalf, FaMedal, FaClipboardList
 } from "react-icons/fa";
 import "./Dashboard.css";
 
@@ -197,6 +198,16 @@ function Dashboard({ user }) {
       setChartData(chartRange);
 
       // ✅ Save last 5 logs for recent activity
+      setLogs(
+        [...allLogs]
+          .sort((a, b) => {
+            const dateA = a.date?.toDate ? a.date.toDate() : new Date(a.date || 0);
+            const dateB = b.date?.toDate ? b.date.toDate() : new Date(b.date || 0);
+            return dateB - dateA;
+          })
+          .slice(0, 5)
+      );
+
       // ✅ Calculate Top Collectors & Farmers
       const collectorStats = {};
       const farmerStats = {};
@@ -269,13 +280,13 @@ function Dashboard({ user }) {
   // Function to get icon based on filter
   const getFilterIcon = (filterType) => {
     const icons = {
-      today: "📅",
-      week: "📊",
-      month: "🗓️",
-      year: "📈",
-      all: "♾️"
+      today: <FaCalendarDay />,
+      week: <FaChartBar />,
+      month: <FaCalendarAlt />,
+      year: <FaChartLine />,
+      all: <FaInfinity />
     };
-    return icons[filterType] || "📊";
+    return icons[filterType] || <FaChartBar />;
   };
 
   // Helper to get time of day greeting
@@ -291,7 +302,7 @@ function Dashboard({ user }) {
       {/* 🔹 Welcome Banner */}
       <div className="welcome-banner">
         <div className="welcome-text">
-          <h1>{getGreeting()}, {user?.displayName?.split(' ')[0] || 'Admin'}! 👋</h1>
+          <h1>{getGreeting()}, {user?.displayName?.split(' ')[0] || 'Admin'}! <FaHandPaper className="icon" /></h1>
           <p>Here's what's happening with your cooperative today.</p>
         </div>
         <div className="date-badge">
@@ -341,7 +352,7 @@ function Dashboard({ user }) {
       {/* ✅ Chart */}
       <div className="chart-section">
         <h2>
-          <span className="chart-icon">📊</span>
+          <span className="chart-icon"><FaChartBar /></span>
           Milk Trends - {filter.charAt(0).toUpperCase() + filter.slice(1)}
         </h2>
         <div className="chart-box">
@@ -373,31 +384,31 @@ function Dashboard({ user }) {
       {/* ✅ Cards */}
       <div className="cards-grid">
         <div className="card">
-          <h3>👨‍🌾 Farmers</h3>
+          <h3><FaUserTie className="icon" /> Farmers</h3>
           <p>{farmers}</p>
         </div>
         <div className="card">
-          <h3>🚛 Collectors</h3>
+          <h3><FaTruck className="icon" /> Collectors</h3>
           <p>{collectors}</p>
         </div>
         <div className="card">
-          <h3>🥛 Milk ({filter})</h3>
+          <h3><FaTint className="icon" /> Milk ({filter})</h3>
           <p>{milkTotal} L</p>
         </div>
         <div className="card money income">
-          <h3>💰 Gross Earnings</h3>
+          <h3><FaMoneyBillWave className="icon" /> Gross Earnings</h3>
           <p>KES {grossEarnings.toLocaleString()}</p>
         </div>
         <div className="card money expense">
-          <h3>🌾 Deductions</h3>
+          <h3><FaSeedling className="icon" /> Deductions</h3>
           <p className="negative">- KES {totalDeductions.toLocaleString()}</p>
         </div>
         <div className="card money net">
-          <h3>💵 Net Payable</h3>
+          <h3><FaMoneyBillAlt className="icon" /> Net Payable</h3>
           <p>KES {netEarnings.toLocaleString()}</p>
         </div>
         <div className="card money pending">
-          <h3>⏳ Pending Payouts</h3>
+          <h3><FaHourglassHalf className="icon" /> Pending Payouts</h3>
           <p>KES {pendingPayments.toLocaleString()}</p>
         </div>
       </div>
@@ -406,7 +417,7 @@ function Dashboard({ user }) {
       <div className="leaderboard-grid">
         {/* Top Farmers */}
         <div className="leaderboard-cardfarmers">
-          <h2>👨‍🌾 Top Farmers</h2>
+          <h2><FaUserTie className="icon" /> Top Farmers</h2>
           <div className="collectors-list">
             {topFarmers.length === 0 ? (
               <p className="no-data">No data available</p>
@@ -414,7 +425,7 @@ function Dashboard({ user }) {
               topFarmers.map((farmer, index) => (
                 <div key={index} className="collector-card">
                   <div className={`rank-badge rank-${index + 1}`}>
-                    {index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}
+                    {index === 0 ? <FaMedal color="#FFD700" /> : index === 1 ? <FaMedal color="#C0C0C0" /> : <FaMedal color="#CD7F32" />}
                   </div>
                   <div className="collector-info">
                     <h4>{farmer.name}</h4>
@@ -431,7 +442,7 @@ function Dashboard({ user }) {
 
         {/* Top Collectors */}
         <div className="leaderboard-card collectors">
-          <h2>🚛 Top Collectors</h2>
+          <h2><FaTruck className="icon" /> Top Collectors</h2>
           <div className="collectors-list">
             {topCollectors.length === 0 ? (
               <p className="no-data">No data available</p>
@@ -439,7 +450,7 @@ function Dashboard({ user }) {
               topCollectors.map((collector, index) => (
                 <div key={index} className="collector-card">
                   <div className={`rank-badge rank-${index + 1}`}>
-                    {index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}
+                    {index === 0 ? <FaMedal color="#FFD700" /> : index === 1 ? <FaMedal color="#C0C0C0" /> : <FaMedal color="#CD7F32" />}
                   </div>
                   <div className="collector-info">
                     <h4>{collector.name}</h4>
@@ -457,7 +468,7 @@ function Dashboard({ user }) {
 
       {/* ✅ Recent Logs */}
       <div className="recent-logs">
-        <h2>📝 Recent Milk Logs</h2>
+        <h2><FaClipboardList className="icon" /> Recent Milk Logs</h2>
         {logs.length === 0 ? (
           <div className="no-data">
             <p>No milk logs found</p>

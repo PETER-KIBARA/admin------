@@ -14,6 +14,10 @@ import {
 } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import { sendNotification } from '../services/notificationService'; // NEW
+import {
+  FaSeedling, FaBox, FaClipboardList, FaChartBar, FaHourglassHalf,
+  FaCheckCircle, FaMoneyBillWave, FaLock, FaExclamationTriangle, FaPhone, FaMapMarkerAlt
+} from 'react-icons/fa';
 import './Feeds.css';
 
 const Feeds = () => {
@@ -27,11 +31,7 @@ const Feeds = () => {
   const [selectedFeed, setSelectedFeed] = useState(null);
   const [message, setMessage] = useState({ show: false, text: '', type: '' });
 
-  // Use refs to track unsubscribe functions
-  const unsubscribeRefs = useRef({
-    feeds: null,
-    requests: null
-  });
+  // Use refs to track unsubscribe functions - removed since unused
 
   const [feedForm, setFeedForm] = useState({
     name: '',
@@ -92,6 +92,7 @@ const Feeds = () => {
   // Fetch farmers only once
   useEffect(() => {
     fetchFarmers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Setup Listeners in a separate useEffect to ensure proper cleanup
@@ -664,7 +665,7 @@ const Feeds = () => {
     <div className="feeds-container">
       {/* Header */}
       <div className="feeds-header">
-        <h1>🌾 Feed Management</h1>
+        <h1><FaSeedling className="icon" /> Feed Management</h1>
         {activeTab === 0 && (
           <button className="btn btn-primary" onClick={() => openDialog()}>
             + Add New Feed
@@ -678,13 +679,13 @@ const Feeds = () => {
           className={`tab ${activeTab === 0 ? 'active' : ''}`}
           onClick={() => setActiveTab(0)}
         >
-          📦 Feed Inventory ({feeds.length})
+          <FaBox className="icon" /> Feed Inventory ({feeds.length})
         </button>
         <button
           className={`tab ${activeTab === 1 ? 'active' : ''}`}
           onClick={() => setActiveTab(1)}
         >
-          📋 Feed Requests ({feedRequests.length})
+          <FaClipboardList className="icon" /> Feed Requests ({feedRequests.length})
         </button>
       </div>
 
@@ -692,7 +693,7 @@ const Feeds = () => {
       {activeTab === 0 && (
         <div className="tab-content">
           <div className="inventory-summary">
-            <h3>📊 Real-time Inventory Status</h3>
+            <h3><FaChartBar className="icon" /> Real-time Inventory Status</h3>
             <p>Available quantities automatically update when feed is delivered to farmers</p>
           </div>
 
@@ -812,21 +813,21 @@ const Feeds = () => {
           {/* Deduction Summary */}
           <div className="deduction-summary">
             <div className="deduction-card pending-deductions">
-              <h3>⏳ Pending Deductions</h3>
+              <h3><FaHourglassHalf className="icon" /> Pending Deductions</h3>
               <div className="deduction-amount">
                 {formatCurrency(totalPendingDeductions)}
               </div>
               <p>Amount to be deducted from pending/approved requests</p>
             </div>
             <div className="deduction-card delivered-deductions">
-              <h3>✅ Already Deducted</h3>
+              <h3><FaCheckCircle className="icon" /> Already Deducted</h3>
               <div className="deduction-amount">
                 {formatCurrency(totalDeliveredDeductions)}
               </div>
               <p>Amount already deducted from delivered requests</p>
             </div>
             <div className="deduction-card total-deductions">
-              <h3>💰 Total Feed Costs</h3>
+              <h3><FaMoneyBillWave className="icon" /> Total Feed Costs</h3>
               <div className="deduction-amount">
                 {formatCurrency(totalPendingDeductions + totalDeliveredDeductions)}
               </div>
@@ -881,17 +882,17 @@ const Feeds = () => {
                     const requestedQty = request.quantity || 0;
 
                     if (request.status === 'delivered') {
-                      return { text: '✅ Inventory updated', class: 'inventory-updated' };
+                      return { text: <><FaCheckCircle /> Inventory updated</>, class: 'inventory-updated' };
                     }
 
                     if (request.status === 'approved') {
-                      return { text: `🔒 ${requestedQty} ${matchingFeed.unit} reserved`, class: 'reserved' };
+                      return { text: <><FaLock /> {requestedQty} {matchingFeed.unit} reserved</>, class: 'reserved' };
                     }
 
                     if (request.status === 'pending') {
                       const canFulfill = stockStatus.available >= requestedQty;
                       return {
-                        text: canFulfill ? `✅ Can fulfill` : `⚠️ Low stock`,
+                        text: canFulfill ? <><FaCheckCircle /> Can fulfill</> : <><FaExclamationTriangle /> Low stock</>,
                         class: canFulfill ? 'can-fulfill' : 'low-stock-warning'
                       };
                     }
@@ -907,8 +908,8 @@ const Feeds = () => {
                         <div className="farmer-details">
                           <strong>{farmerInfo.name}</strong>
                           <div className="farmer-contact">
-                            <span>📞 {farmerInfo.phone}</span>
-                            <span>📍 {farmerInfo.location}</span>
+                            <span><FaPhone className="icon" /> {farmerInfo.phone}</span>
+                            <span><FaMapMarkerAlt className="icon" /> {farmerInfo.location}</span>
                           </div>
                           <div className="farmer-id">ID: {request.farmerId}</div>
                         </div>
@@ -921,10 +922,10 @@ const Feeds = () => {
                           {formatCurrency(feedCost)}
                         </strong>
                         {request.status === 'delivered' && (
-                          <div className="deduction-badge">✅ Deducted</div>
+                          <div className="deduction-badge"><FaCheckCircle className="icon" /> Deducted</div>
                         )}
                         {request.status === 'approved' && (
-                          <div className="pending-badge">⏳ To Deduct</div>
+                          <div className="pending-badge"><FaHourglassHalf className="icon" /> To Deduct</div>
                         )}
                       </td>
                       <td>
