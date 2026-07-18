@@ -1,27 +1,19 @@
 /* Modern Vibrant SaaS Theme */
 :root {
-    --primary: #059669;
-    /* Emerald 600 */
-    --primary-dark: #047857;
-    /* Emerald 700 */
-    --primary-light: #D1FAE5;
-    /* Emerald 100 */
-    --secondary: #F59E0B;
-    /* Amber 500 */
-    --navy: #1E293B;
-    /* Slate 800 */
-    --text-main: #0F172A;
-    /* Slate 900 */
-    --text-muted: #64748B;
-    /* Slate 500 */
-    --bg-white: #FFFFFF;
-    --bg-wash: #F8FAFC;
-    /* Slate 50 */
-    --gradient-main: linear-gradient(135deg, #059669 0%, #10B981 100%);
-    --gradient-hero-bg: radial-gradient(circle at 80% 0%, rgba(16, 185, 129, 0.1) 0%, transparent 40%),
-        radial-gradient(circle at 0% 100%, rgba(59, 130, 246, 0.05) 0%, transparent 40%);
-    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    --shadow-float: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+    --primary: #0c1a17; /* Deep Dark Green */
+    --primary-dark: #050a09; /* Almost Black Green */
+    --primary-light: #152b28; /* Slightly Lighter Green */
+    --secondary: #10b981; /* Emerald Accent */
+    --navy: #1E293B; /* Slate 800 */
+    --text-main: #ffffff; /* White Text */
+    --text-muted: #a1a1aa; /* Light Gray Text */
+    --bg-white: #121212; /* Charcoal Surface */
+    --bg-wash: #0a0a0a; /* Deep Background */
+    --gradient-main: linear-gradient(135deg, #0b1a18 0%, #152b28 100%);
+    --gradient-hero-bg: radial-gradient(circle at 80% 0%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 0% 100%, rgba(12, 26, 23, 0.5) 0%, transparent 40%);
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-float: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
     --radius-lg: 20px;
     --radius-md: 12px;
     --font-heading: 'Outfit', sans-serif;
@@ -30,8 +22,8 @@
 }
 
 body {
-    color: var(--text-dark);
-    background-color: var(--bg-off-white);
+    color: var(--text-main);
+    background-color: var(--bg-wash);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
 }
@@ -93,13 +85,13 @@ h3 {
     background: var(--primary-dark);
     /* Darker green on hover */
     color: white;
-    border-color: var(--primary-dark);
+    border-color: var(--secondary);
 }
 
 .btn-download {
-    background: white;
-    color: var(--primary);
-    border: 1px solid var(--primary);
+    background: var(--primary);
+    color: var(--text-main);
+    border: 1px solid var(--secondary);
     padding: 1rem 2.5rem;
     border-radius: 50px;
     font-weight: 600;
@@ -111,8 +103,8 @@ h3 {
 }
 
 .btn-download:hover {
-    background: var(--primary);
-    color: white;
+    background: var(--primary-dark);
+    color: var(--text-main);
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
@@ -311,7 +303,7 @@ h3 {
     text-align: center;
     font-size: 1.2rem;
     font-weight: 300;
-    color: var(--text-body);
+    color: var(--text-muted);
     max-width: 900px;
     margin: 0 auto;
     line-height: 1.8;
@@ -335,7 +327,7 @@ h3 {
     left: 50%;
     transform: translateX(-50%);
     font-weight: 700;
-    color: var(--primary-dark);
+    color: var(--secondary);
 }
 
 .section-header::after {
@@ -350,7 +342,7 @@ h3 {
 
 /* Stats - Clean Cards */
 .content-section.bg-light {
-    background: var(--bg-light);
+    background: var(--bg-wash);
     padding: 6rem 5%;
 }
 
@@ -361,8 +353,8 @@ h3 {
 }
 
 .stat-card {
-    background: white;
-    border-radius: var(--border-radius);
+    background: var(--bg-white);
+    border-radius: var(--radius-md);
     padding: 2.5rem;
     text-align: center;
     box-shadow: var(--shadow-card);
@@ -374,7 +366,7 @@ h3 {
 
 .stat-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
+    box-shadow: var(--shadow-float);
 }
 
 .stat-card::before {
@@ -386,7 +378,7 @@ h3 {
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: var(--text-light);
+    color: var(--text-main);
     margin-bottom: 1rem;
     font-weight: 600;
 }
@@ -395,7 +387,7 @@ h3 {
     display: block;
     font-size: 4rem;
     font-weight: 700;
-    color: var(--primary);
+    color: var(--secondary);
     line-height: 1;
     margin-bottom: 0.5rem;
     font-family: var(--font-heading);
@@ -414,22 +406,22 @@ h3 {
 }
 
 .activity-item {
-    background: white;
+    background: var(--bg-white);
     padding: 2rem;
-    border-radius: var(--border-radius);
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-card);
     display: flex;
     align-items: center;
     font-size: 1.1rem;
     font-weight: 500;
-    color: var(--text-dark);
+    color: var(--text-main);
     border: 1px solid #e0e0e0;
     transition: transform 0.3s ease;
 }
 
 .activity-item:hover {
     transform: translateY(-2px);
-    border-color: var(--primary);
+    border-color: var(--secondary);
 }
 
 .activity-icon {
@@ -442,14 +434,14 @@ h3 {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    color: var(--primary);
+    color: var(--secondary);
 }
 
 /* Mission / Vision - Clean Green Block */
 .content-section.bg-dark {
     background: var(--primary-light);
     /* Switch to light green bg */
-    color: var(--text-dark);
+    color: var(--text-main);
     /* Dark text */
     padding: 8rem 5%;
     position: relative;
@@ -471,7 +463,7 @@ h3 {
 
 .mv-card h3 {
     font-size: 2rem;
-    color: var(--primary-dark);
+    color: var(--secondary);
     /* Gold for high contrast */
     margin-bottom: 1.5rem;
     text-shadow: none;
@@ -479,7 +471,7 @@ h3 {
 
 .mv-card p {
     font-size: 1.25rem;
-    color: var(--text-body);
+    color: var(--text-muted);
     opacity: 1;
     /* Full opacity */
     font-weight: 400;
@@ -496,7 +488,7 @@ h3 {
 
 .section-header-small {
     font-size: 2rem;
-    color: var(--primary-dark);
+    color: var(--secondary);
     margin-bottom: 2rem;
 }
 
@@ -511,7 +503,7 @@ h3 {
     padding-left: 2rem;
     position: relative;
     font-size: 1.1rem;
-    color: var(--text-body);
+    color: var(--text-muted);
 }
 
 .impact-list li::before {
@@ -756,7 +748,7 @@ h3 {
     }
 
     .nav-brand {
-        color: var(--primary);
+        color: var(--secondary);
     }
 
     .btn-login {

@@ -1,48 +1,37 @@
 /* Global Design System - Premium SaaS Theme */
 :root {
-  /* BRAND COLORS - Deep Emerald & Slate */
-  --primary-color: #047857;
-  /* Emerald 700 - Professional, Trustworthy */
-  --primary-dark: #064e3b;
-  /* Emerald 900 */
-  --primary-light: #10b981;
-  /* Emerald 500 */
-
-  --secondary-color: #d97706;
-  /* Amber 600 - Muted Gold */
-  --secondary-light: #f59e0b;
-
-  --accent-color: #0f172a;
-  /* Slate 900 - High Contrast */
+  /* BRAND COLORS - Dark Premium Theme */
+  --primary-color: #0c1a17; /* Very Deep Green/Teal */
+  --primary-dark: #050a09;
+  --primary-light: #203f38;
+  
+  --secondary-color: #1a1a1a; /* Charcoal */
+  --secondary-light: #2a2a2a;
+  
+  --accent-color: #ffffff; /* White text for contrast */
 
   /* FUNCTIONAL COLORS */
-  --success-color: #059669;
-  --warning-color: #d97706;
-  --error-color: #dc2626;
-  --info-color: #2563eb;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+  --info-color: #3b82f6;
 
-  /* NEUTRALS - Corporate Clean */
-  --bg-body: #f8fafc;
-  /* Slate 50 - Crisp */
-  --bg-surface: #ffffff;
-  --bg-surface-alt: #f1f5f9;
-  /* Slate 100 */
+  /* NEUTRALS - Dark Clean */
+  --bg-body: #0d1211; /* Extremely dark green-tinted black */
+  --bg-surface: #141a18; /* Slightly lighter surface */
+  --bg-surface-alt: #1a221f;
 
-  --text-primary: #0f172a;
-  /* Slate 900 */
-  --text-secondary: #475569;
-  /* Slate 600 */
-  --text-tertiary: #94a3b8;
-  /* Slate 400 */
-  --text-invert: #ffffff;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa; /* Light gray */
+  --text-tertiary: #71717a;
+  --text-invert: #000000;
 
-  --border-color: #e2e8f0;
-  /* Slate 200 */
+  --border-color: #27272a;
 
-  /* SHADOWS - Diffused & Modern */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -1px rgb(0 0 0 / 0.03);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.06), 0 4px 6px -2px rgb(0 0 0 / 0.02);
+  /* SHADOWS */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.7);
 
   /* LAYOUT */
   --sidebar-width: 260px;
